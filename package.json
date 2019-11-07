@@ -9,6 +9,7 @@
   "author": "Nur Ketene",
   "license": "MIT",
   "dependencies": {
-    "@hapi/hapi": "^18.4.0"
+    "@hapi/hapi": "^18.4.0",
+    "handlebars": "^4.5.1"
   }
 }
