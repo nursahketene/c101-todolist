@@ -1,6 +1,8 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const Vision = require('vision');
+const hbs = require('hbs');
 
 const init = async () => {
 
@@ -9,12 +11,21 @@ const init = async () => {
         host: 'localhost'
     });
 
+    await server.register(Vision);
+    server.views({
+        engines: {
+            html: hbs
+        },
+        path: 'views',
+        layoutPath: 'views/layout',
+        layout: 'default'
+    });
+
     server.route({
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-
-            return 'Hello World!';
+            return h.view('index', {})
         }
     });
 
