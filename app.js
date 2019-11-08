@@ -3,6 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const Vision = require('vision');
 const hbs = require('hbs');
+const Inert = require('inert');
 
 const init = async () => {
 
@@ -12,6 +13,7 @@ const init = async () => {
     });
 
     await server.register(Vision);
+    await server.register(Inert );
     server.views({
         engines: {
             html: hbs
@@ -21,13 +23,25 @@ const init = async () => {
         layout: 'default'
     });
 
-    server.route({
-        method: 'GET',
-        path: '/',
+    server.route([
+      {
+        method: "GET",
+        path: "/",
         handler: (request, h) => {
-            return h.view('index', {})
+          return h.view("index", {});
         }
-    });
+      },
+      {
+        method: 'GET',
+        path: '/asset_files/{file*}',
+        handler: {
+          directory: {
+            path: 'assets/',
+            listing: true
+          }
+        }
+      }
+    ]);
 
     await server.start();
     console.log('Server running on %s', server.info.uri);

@@ -1,3 +1,25 @@
-<div>
-    <p>HELLO WORLD</p>
+<div class="todos">
+    <form action="done" method="post">
+        <ul>
+            <li>
+                <input type="checkbox" name="item1" id="item1" value="Buy Milk"> Buy Milk
+            </li>
+            <li>
+                <input type="checkbox" name="item2" id="item2" value="Buy Eggs"> Buy Eggs
+            </li>
+            <li>
+                <input type="checkbox" name="item3" id="item3" value="Buy Tomatoes"> Buy Tomatoes
+            </li>
+        </ul>
+        <button type="submit">Done</button>
+    </form>
+
+    <form action="add" method="post">
+        <ul>
+            <li>
+                <input type="text" name="todo" id="todoInput" placeholder="Add Todo Item Here">
+            </li>
+        </ul>
+        <button type="submit">Add</button>
+    </form>
 </div>
