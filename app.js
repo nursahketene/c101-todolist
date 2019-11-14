@@ -4,6 +4,7 @@ const Hapi = require('@hapi/hapi');
 const Vision = require('vision');
 const hbs = require('hbs');
 const Inert = require('inert');
+const routes = require('./routes')
 
 const init = async () => {
 
@@ -23,25 +24,7 @@ const init = async () => {
         layout: 'default'
     });
 
-    server.route([
-      {
-        method: "GET",
-        path: "/",
-        handler: (request, h) => {
-          return h.view("index", {});
-        }
-      },
-      {
-        method: 'GET',
-        path: '/asset_files/{file*}',
-        handler: {
-          directory: {
-            path: 'assets/',
-            listing: true
-          }
-        }
-      }
-    ]);
+    server.route(routes);
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
